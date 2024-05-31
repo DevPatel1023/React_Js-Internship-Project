@@ -123,12 +123,15 @@
     transform: translateY(-90%);
     transition: 0.5s ease-in-out all;
 }
-.email-box:hover::placeholder, .password-box:hover::placeholder{
-        transform: translateY(-90%);
-        color: rgb(0, 167, 111);
-            transition: 0.5s ease-in-out all;
+
+.email-box:hover::placeholder,
+.password-box:hover::placeholder {
+    transform: translateY(-90%);
+    color: rgb(0, 167, 111);
+    transition: 0.5s ease-in-out all;
 
 }
+
 .email-box:focus,
 .password-box:focus {
     outline: none;
@@ -171,7 +174,8 @@
     color: inherit;
     align-self: flex-end;
 }
-.forget-password:hover{
+
+.forget-password:hover {
     color: rgb(0, 167, 111);
 }
 
@@ -253,6 +257,7 @@
     background-color: rgb(255, 255, 255);
 
 }
+
 /* triggers when less then 1210 */
 @media (max-width: 1210px) {
     .container {
@@ -267,59 +272,72 @@
         width: 90%;
         height: auto;
     }
-    .dash-img-login{
+
+    .dash-img-login {
         max-width: 580px;
     }
+
     .login-form {
         max-width: 100%;
     }
-    .user-name-password-container{
+
+    .user-name-password-container {
         display: flex;
         margin: auto;
         line-height: 15px;
         flex-direction: row;
     }
+
     .eye-icon {
         position: relative;
         left: 90%;
     }
+
     .forget-password {
         position: relative;
         right: 7%;
     }
-    .email-box{
+
+    .email-box {
         width: 94%;
         display: block;
-            margin: auto;
+        margin: auto;
     }
-    .login-button{
+
+    .login-button {
         width: 90%;
         display: block;
         margin: auto;
-        
+
     }
-    .password-box{
+
+    .password-box {
         width: 90%;
         display: block;
-            margin: auto;
+        margin: auto;
     }
 }
+
 /* triggers when ranges between 333px to 700px*/
 @media (min-width: 333px) and (max-width: 700px) {
+
     .welcome-heading,
     .tech-icons,
     .dash-img-login {
         display: none;
     }
+
     .partition-login {
         position: absolute;
         display: flex;
         top: 20%;
         flex-wrap: nowrap;
     }
-    .password-box{
+
+    .password-box {
         width: 85%;
     }
+
     .email-box {
         width: 89%;
     }
@@ -327,13 +345,14 @@
 
 /* triggers when width of the screen is less than 500px */
 @media (max-width: 500px) {
-    .user-name-password-container{
+    .user-name-password-container {
         width: 70%;
     }
 }
+
 /* triggers when width is in the range of 270px to 333px */
 @media (min-width: 270px) and (max-width: 333px) {
- 
+
     .dash-img-login {
         display: none;
     }
@@ -352,25 +371,33 @@
         top: 20%;
         flex-wrap: nowrap;
     }
-    .welcome-login-heading{
+
+    .welcome-login-heading {
         font-size: 1.2rem;
     }
-    .eye-icon{
+
+    .eye-icon {
         width: 10px;
     }
-    .user-name-password-container{
+
+    .user-name-password-container {
         width: 100%;
         font-size: 0.5rem;
     }
-    .create-account-text-link, .forget-password{
+
+    .create-account-text-link,
+    .forget-password {
         font-size: 0.5rem;
     }
-    .info-icon{
+
+    .info-icon {
         width: 15px;
     }
-    .password-box{
+
+    .password-box {
         width: 79%;
     }
+
     .email-box {
         width: 88%;
     }
@@ -378,49 +405,61 @@
 
 /* triggers when width is between the range of 0px to 270px */
 @media (min-width: 0px) and (max-width: 270px) {
-    .logo{
+    .logo {
         margin: 22px 0px 0px 49px;
         display: block;
     }
+
     .dash-img-login {
         display: none;
     }
+
     .welcome-heading {
         display: none;
     }
+
     .tech-icons {
         display: none;
     }
+
     .partition-login {
         position: absolute;
         display: flex;
         top: 10%;
         flex-wrap: nowrap;
     }
+
     .welcome-login-heading {
         font-size: 0.9rem;
     }
+
     .eye-icon {
         width: 10px;
     }
+
     .user-name-password-container {
         width: 100%;
         font-size: 0.5em;
     }
+
     .create-account-text-link,
     .forget-password {
         font-size: 0.5rem;
     }
+
     .info-icon {
         width: 10px;
     }
-    .email-box{
+
+    .email-box {
         width: 72%;
     }
+
     .password-box {
         width: 57%;
     }
-    .eye-icon{
+
+    .eye-icon {
         position: relative;
         left: 80%;
     }

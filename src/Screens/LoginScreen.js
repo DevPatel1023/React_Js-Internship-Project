@@ -11,7 +11,6 @@ import eyeClose from '../Images/icons/close-eye.svg';
 import '../CSS/login.css';
 import Logo from '../Components/Logo';
 
-
 function LoginScreen() {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -27,7 +26,7 @@ function LoginScreen() {
                 <h3 className="welcome-heading">Hi, Welcome back</h3>
 
                 {/* logo of the website */}
-                <Logo/>
+                <Logo className="logo"/>
 
                 {/* main dashboard image */}
                 <div className="img-container">
