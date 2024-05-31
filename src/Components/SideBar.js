@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import { Drawer, List, ListItem, ListItemIcon, ListItemText, Collapse, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LoginIcon from '@mui/icons-material/Login';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ArticleIcon from '@mui/icons-material/Article';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import Logo from '../Images/assests/Logo.svg'; 
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Logo from '../Images/assests/Logo.svg';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 const Sidebar = () => {
   const [openUser, setOpenUser] = useState(false);
   const [openBlog, setOpenBlog] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false); 
+  const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen); 
+  };
 
   const handleUserClick = () => {
     setOpenUser(!openUser);
@@ -57,16 +60,9 @@ const Sidebar = () => {
     { text: 'Signup', icon: <PersonAddIcon />, path: '/signup' },
   ];
 
-  return (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: 240,
-        flexShrink: 0,
-        [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box' },
-      }}
-    >
-       <img src={Logo} alt="Logo" style={{ width: '20%', margin:'20px' }} />
+  const drawer = (
+    <div>
+      <img src={Logo} alt="Logo" style={{ width: '20%', margin: '20px' }} />
       <List>
         {menuItems.map((item, index) => (
           <div key={index}>
@@ -86,7 +82,7 @@ const Sidebar = () => {
                   {item.items.map((subItem, subIndex) => (
                     <ListItem button key={subIndex} component='a' href={subItem.path} sx={{ pl: 4 }}>
                       <ListItemIcon>
-                        <KeyboardArrowRightIcon />
+                        <FiberManualRecordIcon fontSize='1%' />
                       </ListItemIcon>
                       <ListItemText primary={subItem.text} />
                     </ListItem>
@@ -97,7 +93,49 @@ const Sidebar = () => {
           </div>
         ))}
       </List>
-    </Drawer>
+    </div>
+  );
+
+  return (
+    <>
+      {isMobile ? (
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle} 
+          ModalProps={{
+            keepMounted: true,
+          }}
+          sx={{
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      ) : (
+        <Drawer
+          variant="permanent"
+          sx={{
+            width: 240,
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box' },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      )}
+      {isMobile && ( 
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerToggle} 
+          edge="start"
+          sx={{ display: { sm: 'inline-block', md: 'none' } ,top: '0', left: '0'}}
+        >
+          <MenuIcon />
+        </IconButton>
+      )}
+    </>
   );
 };
 
