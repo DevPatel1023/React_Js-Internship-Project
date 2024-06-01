@@ -4,7 +4,7 @@ import React from 'react';
 import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Header from './Components/Header';
 import MainContent from './Components/MainComponent';
-import Sidebar from './Components/SideBar';
+
 
 
 const theme = createTheme({
@@ -28,7 +28,6 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <Sidebar />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Header />
           <MainContent />
