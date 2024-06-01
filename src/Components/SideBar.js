@@ -82,7 +82,7 @@ const Sidebar = () => {
                   {item.items.map((subItem, subIndex) => (
                     <ListItem button key={subIndex} component='a' href={subItem.path} sx={{ pl: 4 }}>
                       <ListItemIcon>
-                        <FiberManualRecordIcon fontSize='1%' />
+                        <FiberManualRecordIcon fontSize='0.0000000001%' />
                       </ListItemIcon>
                       <ListItemText primary={subItem.text} />
                     </ListItem>

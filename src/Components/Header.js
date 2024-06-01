@@ -9,9 +9,10 @@ import Stack from '@mui/material/Stack';
 import { deepOrange } from '@mui/material/colors';
 import Sidebar from './SideBar';
 
+
         const Header = () => {
             return (
-                <AppBar  sx={{ bgcolor: '#ffffff', color: '#000000' }}>
+                <AppBar sx={{ bgcolor: '#ffffff', color: '#000000' }}>
                     <Toolbar>
                         <Sidebar />
                         <Typography variant="h6" sx={{ flexGrow: 1 }}>
