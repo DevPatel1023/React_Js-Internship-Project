@@ -169,7 +169,6 @@ const CreateNewPost = () => {
             Content
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="body2">Normal</Typography>
             <Box sx={{ display: 'flex',flexWrap: 'wrap', alignItems: 'center' }}>
               <Tooltip title="Bold">
                 <IconButton onClick={handleBoldClick}>
