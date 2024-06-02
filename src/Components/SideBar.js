@@ -12,8 +12,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import Logo from '../Images/assests/Logo.svg'; 
-
+import Logo from '../Images/assests/Logo.svg';
 
 const Sidebar = () => {
   const [openUser, setOpenUser] = useState(false);
@@ -59,46 +58,55 @@ const Sidebar = () => {
   ];
 
   return (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: 240,
-        flexShrink: 0,
-        [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box' },
-      }}
-    >
-       <img src={Logo} alt="Logo" style={{ width: '20%', margin:'20px' }} />
-      <List>
-        {menuItems.map((item, index) => (
-          <div key={index}>
-            <ListItem
-              button
-              onClick={item.handleClick}
-              component={item.path ? 'a' : 'div'}
-              href={item.path ? item.path : undefined}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-              {item.items ? (item.open ? <ExpandLess /> : <ExpandMore />) : null}
-            </ListItem>
-            {item.items && (
-              <Collapse in={item.open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  {item.items.map((subItem, subIndex) => (
-                    <ListItem button key={subIndex} component='a' href={subItem.path} sx={{ pl: 4 }}>
-                      <ListItemIcon>
-                        <KeyboardArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary={subItem.text} />
-                    </ListItem>
-                  ))}
-                </List>
-              </Collapse>
-            )}
-          </div>
-        ))}
-      </List>
-    </Drawer>
+    // Change made: Parent container with relative positioning
+    <div style={{ display: 'flex', position: 'relative', height: '100vh' }}>
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: 240,
+          flexShrink: 0,
+          // change made: Absolute positioning for the Drawer
+          position: 'absolute',
+          height: '100%',
+          [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box', position: 'relative' },
+        }}
+      >
+         <img src={Logo} alt="Logo" style={{ width: '20%', margin: '20px' }} />
+        <List>
+          {menuItems.map((item, index) => (
+            <div key={index}>
+              <ListItem
+                button
+                onClick={item.handleClick}
+                component={item.path ? 'a' : 'div'}
+                href={item.path ? item.path : undefined}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+                {item.items ? (item.open ? <ExpandLess /> : <ExpandMore />) : null}
+              </ListItem>
+              {item.items && (
+                <Collapse in={item.open} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    {item.items.map((subItem, subIndex) => (
+                      <ListItem button key={subIndex} component='a' href={subItem.path} sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                          <KeyboardArrowRightIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={subItem.text} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Collapse>
+              )}
+            </div>
+          ))}
+        </List>
+      </Drawer>
+      {/* change made: Main content area with left margin and horizontal scroll */}
+      <main style={{ flexGrow: 1, padding: '16px', marginLeft: '240px', overflowX: 'auto' }}>
+      </main>
+    </div>
   );
 };
 
