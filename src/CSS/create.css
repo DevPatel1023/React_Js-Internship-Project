@@ -122,6 +122,21 @@
     gap: 16px;
     justify-content: center !important;
 }
+.user-details-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: black in !important;
+}
+
+.user-details-field .MuiFormLabel-root.Mui-focused {
+    color: black !important;
+}
+
+.user-details-field .MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: black !important;
+}
+
+.user-details-field .MuiInputLabel-root.Mui-focused {
+    color: black !important;
+}
 @media (max-width: 1000px) {
     .form-container {
         flex-direction: column;

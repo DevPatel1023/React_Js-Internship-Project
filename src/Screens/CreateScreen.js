@@ -4,7 +4,6 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import UploadPhoto from '../Images/icons/uploadPhoto_icon.svg';
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Box from '@mui/material/Box';
@@ -24,6 +23,30 @@ const DemoPaper = styled(Paper)(({ theme }) => ({
     borderRadius: 25,
     [theme.breakpoints.down('md')]: {
         width: 750,
+    },
+}));
+
+const CustomTextField = styled(TextField)(({ theme }) => ({
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'black !important',
+    },
+    '& .MuiFormLabel-root.Mui-focused': {
+        color: 'black !important',
+    },
+}));
+
+const CustomFormControl = styled(FormControl)(({ theme }) => ({
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'black !important',
+    },
+    '& .MuiInputLabel-root.Mui-focused': {
+        color: 'black !important',
+    },
+}));
+
+const CustomSelect = styled(Select)(({ theme }) => ({
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'black !important',
     },
 }));
 
@@ -164,6 +187,7 @@ function CreateScreen() {
             console.log('Form Submitted', formValues);
         }
     };
+
     const handleUploadPhotoClick = () => {
         document.getElementById('upload-photo-input').click();
     };
@@ -175,6 +199,7 @@ function CreateScreen() {
             })
             .catch(error => {
                 console.error('Error fetching countries:', error);
+                console.error('Error response:', error.response); // Log the detailed error response
             });
     }, []);
 
@@ -208,7 +233,7 @@ function CreateScreen() {
                                 <br />
                                 <span className='upload-img-text'>Allowed *.jpeg, *.jpg, *.png, *.gif
                                     <br />max size of 3 Mb</span>
-                                {isPhotoUploaded || errors.photo ? <p className="avatar-required-text" style={{ color: 'red' }}>Avatar is required</p> : null }
+                                {isPhotoUploaded || errors.photo ? <p className="avatar-required-text" style={{ color: 'red' }}>Avatar is required</p> : null}
                                 <input type="file" id="upload-photo-input" style={{ display: 'none' }} onChange={() => setIsPhotoUploaded(true)} />
                             </div>
                             <div className="email-verification">
@@ -219,7 +244,7 @@ function CreateScreen() {
                                     </span>
                                     <FormControlLabel
                                         control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                                        color='rgb(0, 167, 111)' 
+                                        color='rgb(0, 167, 111)'
                                     />
                                 </div>
                             </div>
@@ -238,7 +263,7 @@ function CreateScreen() {
                                     noValidate
                                     autoComplete="off"
                                 >
-                                    <TextField
+                                    <CustomTextField
                                         className="user-details-field"
                                         id="fullName"
                                         label="Full Name"
@@ -246,14 +271,14 @@ function CreateScreen() {
                                         value={formValues.fullName}
                                         onChange={handleChange}
                                         error={errors.fullName}
-                                        helperText={errors.fullName ? 'This field is required' : ''}
+                                        helperText={errors.fullName ? 'Full Name Required' : ''}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: '10px',
                                             },
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         className="user-details-field"
                                         id="email"
                                         label="Email Address"
@@ -261,7 +286,7 @@ function CreateScreen() {
                                         value={formValues.email}
                                         onChange={handleChange}
                                         error={errors.email}
-                                        helperText={errors.email ? 'This field is required' : ''}
+                                        helperText={errors.email ? 'Email Address Required' : ''}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: '10px',
@@ -271,15 +296,15 @@ function CreateScreen() {
                                             mb: 1,
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         className="user-details-field"
-                                        id="phoneNumber"
-                                        label="Phone Number"
+                                        id="state"
+                                        label="State/Region"
                                         variant="outlined"
-                                        value={formValues.phoneNumber}
+                                        value={formValues.state}
                                         onChange={handleChange}
-                                        error={errors.phoneNumber}
-                                        helperText={errors.phoneNumber ? 'This field is required' : ''}
+                                        error={errors.state}
+                                        helperText={errors.state ? 'State/Region is required' : ''}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: '10px',
@@ -290,9 +315,9 @@ function CreateScreen() {
                                         }}
                                     />
                                     <Box sx={{ minWidth: 400, display: 'inline' }}>
-                                        <FormControl variant="outlined" style={{ marginTop: '9px' }} error={errors.country}>
+                                        <CustomFormControl variant="outlined" style={{ marginTop: '9px' }} error={errors.country}>
                                             <InputLabel id="demo-simple-select-label">Enter the Country</InputLabel>
-                                            <Select
+                                            <CustomSelect
                                                 labelId="demo-simple-select-label"
                                                 id="country"
                                                 value={formValues.country}
@@ -309,25 +334,31 @@ function CreateScreen() {
                                                     },
                                                 }}
                                             >
-                                                {countries.map((country, index) => (
-                                                    <MenuItem key={index} value={country.alpha2Code}>
-                                                        <img src={country.flags.svg} alt={country.name} style={{ width: '20px', height: '20px', marginRight: '5px', borderRadius: '50%' }} />
-                                                        {country.name}
+                                                {countries.length > 0 ? (
+                                                    countries.map((country, index) => (
+                                                        <MenuItem key={index} value={country.alpha2Code}>
+                                                            <img src={country.flags.svg} alt={country.name} style={{ width: '20px', height: '20px', marginRight: '10px', borderRadius: '50%' }} />
+                                                            {country.name}
+                                                        </MenuItem>
+                                                    ))
+                                                ) : (
+                                                    <MenuItem value="" disabled>
+                                                        Loading...
                                                     </MenuItem>
-                                                ))}
-                                            </Select>
-                                            {errors.country && <p style={{ color: '#d32f2f', fontSize: '12px', marginTop: '5px', marginLeft: '10px' }}>This field is required</p>}
-                                        </FormControl>
+                                                )}
+                                            </CustomSelect>
+                                            {errors.country && <p style={{ color: '#d32f2f', fontSize: '12px', marginTop: '5px', marginLeft: '10px' }}>Country is Required</p>}
+                                        </CustomFormControl>
                                     </Box>
-                                    <TextField
+                                    <CustomTextField
                                         className="user-details-field"
-                                        id="state"
-                                        label="State/Region"
+                                        id="phoneNumber"
+                                        label="Phone Number"
                                         variant="outlined"
-                                        value={formValues.state}
+                                        value={formValues.phoneNumber}
                                         onChange={handleChange}
-                                        error={errors.state}
-                                        helperText={errors.state ? 'This field is required' : ''}
+                                        error={errors.phoneNumber}
+                                        helperText={errors.phoneNumber ? 'Phone Number Required' : ''}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: '10px',
@@ -337,7 +368,7 @@ function CreateScreen() {
                                             mb: 1,
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         className="user-details-field"
                                         id="city"
                                         label="City"
@@ -345,7 +376,7 @@ function CreateScreen() {
                                         value={formValues.city}
                                         onChange={handleChange}
                                         error={errors.city}
-                                        helperText={errors.city ? 'This field is required' : ''}
+                                        helperText={errors.city ? 'City is required' : ''}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: '10px',
@@ -355,7 +386,7 @@ function CreateScreen() {
                                             mb: 1,
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         className="user-details-field"
                                         id="address"
                                         label="Address"
@@ -363,7 +394,7 @@ function CreateScreen() {
                                         value={formValues.address}
                                         onChange={handleChange}
                                         error={errors.address}
-                                        helperText={errors.address ? 'This field is required' : ''}
+                                        helperText={errors.address ? 'Address is required' : ''}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: '10px',
@@ -373,7 +404,7 @@ function CreateScreen() {
                                             mb: 1,
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         className="user-details-field"
                                         id="zip"
                                         label="Zip/Code"
@@ -381,7 +412,7 @@ function CreateScreen() {
                                         value={formValues.zip}
                                         onChange={handleChange}
                                         error={errors.zip}
-                                        helperText={errors.zip ? 'This field is required' : ''}
+                                        helperText={errors.zip ? 'Zip Code is required' : ''}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: '10px',
@@ -391,7 +422,7 @@ function CreateScreen() {
                                             mb: 1,
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         className="user-details-field"
                                         id="company"
                                         label="Company"
@@ -399,7 +430,7 @@ function CreateScreen() {
                                         value={formValues.company}
                                         onChange={handleChange}
                                         error={errors.company}
-                                        helperText={errors.company ? 'This field is required' : ''}
+                                        helperText={errors.company ? 'Company Name is required' : ''}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: '10px',
@@ -409,7 +440,7 @@ function CreateScreen() {
                                             mb: 1,
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         className="user-details-field"
                                         id="role"
                                         label="Role"
@@ -417,7 +448,7 @@ function CreateScreen() {
                                         value={formValues.role}
                                         onChange={handleChange}
                                         error={errors.role}
-                                        helperText={errors.role ? 'This field is required' : ''}
+                                        helperText={errors.role ? 'Role in the company is required' : ''}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: '10px',
@@ -430,7 +461,7 @@ function CreateScreen() {
                                     <br />
                                     <br />
                                     <div className='button-container'>
-                                        <Stack direction="row" spacing={2} sx={{}}>
+                                        <Stack direction="row" spacing={2}>
                                             <Button
                                                 className='create-user-button'
                                                 sx={{ textTransform: 'none', borderRadius: '10px' }}
@@ -442,7 +473,6 @@ function CreateScreen() {
                                     </div>
                                     <br />
                                 </Box>
-
                             </div>
                         </DemoPapers>
                     </Stack>
