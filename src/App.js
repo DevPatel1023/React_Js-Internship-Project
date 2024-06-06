@@ -1,5 +1,3 @@
-import './App.css';
-// import LoginScreen from './Screens/LoginScreen';
 import React from 'react';
 import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import MainContent from './Components/MainComponent';
