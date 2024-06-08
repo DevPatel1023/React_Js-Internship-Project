@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React,{useState,useEffect} from 'react';
 import '../CSS/edit.css';
 import Stack from '@mui/material/Stack';
+import UploadPhoto from '../Images/icons/uploadPhoto_icon.svg';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -120,7 +121,7 @@ function CreateScreen() {
     const [countries, setCountries] = useState([]);
     const [formValues, setFormValues] = useState({
         fullName: 'Vishrey Chotalia',
-        email: 'vishreychotalia@gmaiil.com',
+        email: 'vishreychotalia@gmail.com',
         phoneNumber: '123456789',
         country: '',
         state: 'Gujarat',
@@ -221,14 +222,14 @@ function CreateScreen() {
 
     return (
         <div className='create-container'>
-            <h2 className='create-title-txt'>Create a new user</h2>
+            <h2 className='create-title-txt'>Edit user</h2>
             <div className='nav-link-container'>
-                <span className='current-location'>
+                <span >
                     <a className='navigation-links' href="#">Dashboard</a>
-                    <ul type='.'><li></li></ul>
-                    <a className='navigation-links' href="">Blog</a>
-                    <ul type='.'><li></li></ul>
-                    Edit Vishrey Chotalia
+                    <ul type='.'><li><strong>.</strong></li></ul>
+                    <a className='navigation-links' href="">User</a>
+                    <ul type='.'><li><strong>.</strong></li></ul>
+                    <a className='current-location' href="#">Vishrey Chotalia</a>
                 </span>
             </div>
             <br /><br />

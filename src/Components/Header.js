@@ -6,13 +6,22 @@ import Button from '@mui/material/Button';
 
 const Header = () => {
     return (
-        <AppBar position="static" color='' style={{borderRadius:'15px'}}>
+        <AppBar
+            position="static"
+            color=''
+            sx={{
+                borderRadius: '15px',
+                display: 'flex',
+                maxWidth: '81%',  // Adjust the max width to your preference
+                margin: '20px 20px 20px auto',  // Align to the right
+                padding: '0 20px'  // Optional: Adjust padding as needed
+            }}
+        >
             <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                     Minimal
                 </Typography>
-                <Button color="inherit">Login</Button>
-                <Button color="inherit">Signup</Button>
+                <Button color="inherit" href='/login'>Login</Button>
             </Toolbar>
         </AppBar>
     );

@@ -13,6 +13,11 @@ import {
 import { styled } from '@mui/system';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
+import {
+  FormGroup,
+  FormControlLabel,
+  Chip,
+} from '@mui/material';
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -111,31 +116,19 @@ const CreateNewPost = () => {
   const [content, setContent] = useState('');
   const [coverImage, setCoverImage] = useState(null);
   const [attachedFiles, setAttachedFiles] = useState([]);
-  const [tags, setTags] = useState('');
-  const [metaTitle, setMetaTitle] = useState('');
-  const [metaDescription, setMetaDescription] = useState('');
+
   const [metaKeywords, setMetaKeywords] = useState('');
-  const [enableComments, setEnableComments] = useState(true);
+
 
   const handleTagsChange = (event) => {
     setTags(event.target.value);
-  };
-
-  const handleMetaTitleChange = (event) => {
-    setMetaTitle(event.target.value);
-  };
-
-  const handleMetaDescriptionChange = (event) => {
-    setMetaDescription(event.target.value);
   };
 
   const handleMetaKeywordsChange = (event) => {
     setMetaKeywords(event.target.value);
   };
 
-  const handleEnableCommentsChange = (event) => {
-    setEnableComments(event.target.checked);
-  };
+
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -156,6 +149,58 @@ const CreateNewPost = () => {
   const handleAttachFileClick = (event) => {
     const files = Array.from(event.target.files);
     setAttachedFiles([...attachedFiles, ...files]);
+  };
+  //ssss
+  const [tags, setTags] = useState([
+    'Technology',
+    'Marketing',
+    'Design',
+    'Photography',
+    'Art',
+  ]);
+  const [keywords, setKeywords] = useState([
+    'Fitness',
+    'Nature',
+    'Business',
+  ]);
+
+  const [metaTitle, setMetaTitle] = useState('Minimal UI Kit');
+  const [metaDescription, setMetaDescription] = useState(
+    'The starting point for your next project with Minimal UI Kit'
+  );
+  const [enableComments, setEnableComments] = useState(false);
+  const [publish, setPublish] = useState(false);
+
+  const handleAddTag = (tag) => {
+    setTags([...tags, tag]);
+  };
+
+  const handleRemoveTag = (tag) => {
+    setTags(tags.filter((t) => t !== tag));
+  };
+
+  const handleAddKeyword = (keyword) => {
+    setKeywords([...keywords, keyword]);
+  };
+
+  const handleRemoveKeyword = (keyword) => {
+    setKeywords(keywords.filter((k) => k !== keyword));
+  };
+
+  const handleMetaTitleChange = (event) => {
+    setMetaTitle(event.target.value);
+  };
+
+  const handleMetaDescriptionChange = (event) => {
+    setMetaDescription(event.target.value);
+  };
+
+  const handleEnableCommentsChange = (event) => {
+    setEnableComments(event.target.checked);
+  };
+
+  const handlePublishChange = (event) => {
+    setPublish(event.target.checked);
   };
 
   const handleSubmit = (event) => {
@@ -178,7 +223,7 @@ const CreateNewPost = () => {
     <div className="blogcreate">
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 5, borderRadius: '10px' }}>
         <Typography variant="h5" gutterBottom fontWeight="bolder" style={{ display: 'flex', flexDirection: 'column', width: "100%" }}>
-          Create New Post
+          Edit Post
 
           <div className='nav-link-container' style={style2['.nav-link-container']}>
             <span className='current-location' style={style2['.current-location']}>
@@ -186,7 +231,7 @@ const CreateNewPost = () => {
               <ul type='.' style={{ display: 'inline', margin: '0 3px' }}><li></li></ul>
               <a className='navigation-links' style={{ ...style2['.navigation-links'], marginRight: '3px' }} href="">Blog</a>
               <ul type='.' style={{ display: 'inline', margin: '0 3px' }}><li></li></ul>
-              Create Blog
+              Edit Blog
             </span>
           </div>
         </Typography>
@@ -305,97 +350,117 @@ const CreateNewPost = () => {
           </Paper>
         </Container>
         <Container maxWidth="md" sx={{ mt: 4, borderRadius: '10px' }}>
-          <Typography variant="h5" gutterBottom fontWeight="bolder" style={{ display: 'flex', flexDirection: 'column', width: "100%" }}>
-            Properties</Typography>
-          <Typography gutterBottom style={{ display: 'flex', flexDirection: 'column', width: "100%" }}>
-            Additional functions and attributes...</Typography>
-          <br />
-          <Paper elevation={3} sx={{ p: 3, borderRadius: '10px' }}>
+          <Paper elevation={3} sx={{ p: 5, borderRadius: '10px' }}>
+        <Box sx={{ padding: 4 }}>
+      <Typography variant="h5" gutterBottom>
+        Metadata
+      </Typography>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography variant="subtitle1" gutterBottom>
+            Tags
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            {tags.map((tag) => (
+              <Chip
+                key={tag}
+                label={tag}
+                onDelete={() => handleRemoveTag(tag)}
+                variant="outlined"
+              />
+            ))}
             <TextField
-              label="Tags"
-              value={tags}
-              onChange={handleTagsChange}
-              fullWidth
-              sx={{
-                mb: 2,
-                borderRadius: '10px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '10px',
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: 'black',
-                  },
-                },
-                '& .MuiFormLabel-root.Mui-focused': {
-                  color: 'black',
-                },
+              label="Add Tag"
+              size="small"
+              onKeyPress={(event) => {
+                if (event.key === 'Enter') {
+                  handleAddTag(event.target.value);
+                  event.target.value = '';
+                }
               }}
             />
+          </Box>
+        </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+            label="Meta Title"
+            value={metaTitle}
+            onChange={handleMetaTitleChange}
+            fullWidth
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+            label="Meta Description"
+            value={metaDescription}
+            onChange={handleMetaDescriptionChange}
+            fullWidth
+            multiline
+            rows={3}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Typography variant="subtitle1" gutterBottom>
+            Keywords
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            {keywords.map((keyword) => (
+              <Chip
+                key={keyword}
+                label={keyword}
+                onDelete={() => handleRemoveKeyword(keyword)}
+                variant="outlined"
+              />
+            ))}
             <TextField
-              label="Meta title"
-              value={metaTitle}
-              onChange={handleMetaTitleChange}
-              fullWidth
-              sx={{
-                mb: 2,
-                borderRadius: '10px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '10px',
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: 'black',
-                  },
-                },
-                '& .MuiFormLabel-root.Mui-focused': {
-                  color: 'black',
-                },
+              label="Add Keyword"
+              size="small"
+              onKeyPress={(event) => {
+                if (event.key === 'Enter') {
+                  handleAddKeyword(event.target.value);
+                  event.target.value = '';
+                }
               }}
             />
-            <TextField
-              label="Meta description"
-              value={metaDescription}
-              onChange={handleMetaDescriptionChange}
-              multiline
-              rows={4}
-              fullWidth
-              sx={{
-                mb: 2,
-                borderRadius: '10px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '10px',
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: 'black',
-                  },
-                },
-                '& .MuiFormLabel-root.Mui-focused': {
-                  color: 'black',
-                },
-              }}
+          </Box>
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={enableComments}
+                  onChange={handleEnableCommentsChange}
+                />
+              }
+              label="Enable comments"
             />
-            <TextField
-              label="Meta keywords"
-              value={metaKeywords}
-              onChange={handleMetaKeywordsChange}
-              fullWidth
-              sx={{
-                mb: 2,
-                borderRadius: '10px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '10px',
-                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: 'black',
-                  },
-                },
-                '& .MuiFormLabel-root.Mui-focused': {
-                  color: 'black',
-                },
-              }}
+          </FormGroup>
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={publish}
+                  onChange={handlePublishChange}
+                />
+              }
+              label="Publish"
             />
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <IOSSwitch checked={enableComments} onChange={handleEnableCommentsChange} />
-              <Typography variant="body1" ml={1}>
-                Enable comments
-              </Typography>
-            </Box>
-          </Paper>
+          </FormGroup>
+        </Grid>
+
+       
+      </Grid>
+    </Box>
+  </Paper>
         </Container>
         <Box sx={{ mt: 3 }}>
           <Button variant="outlined" type="button" sx={{ mx: 2 }} onClick={handleSubmit} style={{ color: 'grey', padding:'10px',borderRadius:'10px'}}>
@@ -407,7 +472,7 @@ const CreateNewPost = () => {
             type="submit"
             onClick={handleSubmit}
           >
-            Create Post
+            Save Changes
           </Button>
         </Box>
       </Box>

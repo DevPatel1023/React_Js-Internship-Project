@@ -232,12 +232,12 @@ function CreateScreen() {
         <div className='create-container'>
             <h2 className='create-title-txt'>Create a new user</h2>
             <div className='nav-link-container'>
-                <span className='current-location'>
+                <span >
                     <a className='navigation-links' href="#">Dashboard</a>
-                    <ul type='.'><li></li></ul>
-                    <a className='navigation-links' href="">Blog</a>
-                    <ul type='.'><li></li></ul>
-                    Account
+                    <ul type='.'><li><strong>.</strong></li></ul>
+                    <a className='navigation-links' href="">User</a>
+                    <ul type='.'><li><strong>.</strong></li></ul>
+                    <a className='current-location' href="#">Account</a>
                 </span>
             </div>
             <br /><br />
@@ -502,5 +502,4 @@ function CreateScreen() {
     );
 }
 export default CreateScreen;
-
 

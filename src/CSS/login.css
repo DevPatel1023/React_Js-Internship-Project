@@ -6,7 +6,6 @@
 }
 
 .container {
-    background: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)) center center / cover no-repeat, url('../Images/overlays/overlay_1.jpg');
     display: flex;
 }
 

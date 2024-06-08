@@ -115,6 +115,7 @@ const BlogDescription = () => {
                         <Typography variant='h4' fontWeight={500}>
                             Paragraph
                         </Typography>
+                        <br />
                         <p className="spacer"></p>
                         <Box>
                             <Typography variant='h7'>
@@ -126,15 +127,19 @@ const BlogDescription = () => {
                             </Typography>
                         </Box>
                     </Box>
+                    <br />
                     <p><strong>This is strong text.</strong></p>
+                    <br />
                     <p><em>This is italic text.</em></p>
+                    <br />
                     <p><u>This is underline text.</u></p>
-
+                    <br />
                     <ul>
                         <Divider />
                         <Typography variant='h4'>
                             <li>Unordered list</li>
                         </Typography>
+                        <br />
                         <Typography variant='h7'>
 
                             <ul>
@@ -146,16 +151,20 @@ const BlogDescription = () => {
                             </ul>
                         </Typography>
                     </ul>
+                    <br />
                     <Divider />
+                    <br />
                     <ol>
                         <li>Ordered list</li>
                         <li>Analysis</li>
                         <li>Design</li>
                         <li>Implementation</li>
                     </ol>
+                    <br />
                     <img className='container' src='https://api-prod-minimal-v510.vercel.app/assets/images/cover/cover_14.jpg' width={850} height={500} sx={{borderRadius:'20px'}}></img>
                     <Typography variant='h6'></Typography>
                 </Box>
+                <br />
                 <form>
                     <p className="spacer"></p>
                     <Divider />
@@ -167,13 +176,16 @@ const BlogDescription = () => {
                         <Button variant="contained" sx={{ marginLeft: '10px' }} color='grey' bgcolor='grey' size="small">Design</Button>
                         <Button variant="contained" sx={{ marginLeft: '10px' }} color='grey' bgcolor='grey' size="small">Art</Button>
                     </Toolbar>
+                    <br />
                     <Divider />
+                    <br />
                     <p className="spacer"></p>
                     <p className="spacer"></p>
                     <Badge badgeContent={4} color="inherit" variant='h2' sx={{fontSize:50}}>
                     <Typography variant='h4' fontWeight={4400} fontFamily='Sans-serif'>
                         Comments
                     </Typography>
+                        <br />
                     </Badge>
                     <p className="spacer"></p>
                     <TextField
@@ -188,6 +200,7 @@ const BlogDescription = () => {
                         }}
                     />
                 </form>
+                <br />
                 <p className="spacer"></p>
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
                     <div sx={{ justifyContent:'left' }}>
@@ -204,7 +217,7 @@ const BlogDescription = () => {
                     </div>
                     <Button variant="contained" sx={{ bgcolor: 'black', fontFamily: 'inherit',  borderRadius: '5px' }} >Post comment</Button>
                 </Toolbar>
-                <p className="spacer"></p>
+                <p className="spacer"></p><br />
                 <Divider/> 
                 <p className="spacer"></p>
                 <Toolbar sx={{ justifyContent: 'center' ,fontSize:100}}>

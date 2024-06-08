@@ -36,8 +36,7 @@ const Sidebar = () => {
       items: [
         { text: 'Profile', path: '/profile' },
         { text: 'Cards', path: '/cards' },
-        { text: 'List', path: '/list' },
-        { text: 'Create', path: '' },
+        { text: 'Create', path: '/create' },
         { text: 'Edit', path: '/edit' },
         { text: 'Account', path: '/account' },
       ],
@@ -54,8 +53,7 @@ const Sidebar = () => {
         { text: 'Edit', path: '/blog/edit' },
       ],
     },
-    { text: 'Login', icon: <LoginIcon />, path: '/login' },
-    { text: 'Signup', icon: <PersonAddIcon />, path: '/signup' },
+    { text: 'Login', icon: <LoginIcon />, path: '/login' }
   ];
 
   return (
