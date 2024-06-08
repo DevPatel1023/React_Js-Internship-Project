@@ -1,0 +1,131 @@
+ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+  }
+  li {
+    cursor:pointer;
+    display: inline-block; /* Display list items horizontally */
+  }
+  
+  a {
+    display: block; /* Make anchor tags block level */
+    padding: 10px 20px; /* Add padding to create clickable area */
+    color: rgb(0, 0, 0); /* Set text color */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  a:hover {
+     /* Change background color on hover */
+    text-decoration: underline;
+  }
+
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+  .container{
+    max-width :1300px;
+    width:100%;
+    margin:auto;
+    padding:20px;
+  
+  }
+  section{
+    margin-top: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+  }
+  .cards{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .card{
+    flex: 0 0 calc(50%- 20px);
+    max-width: calc(50% - 20px);
+    width:100%;
+    background: #f8f4f4;
+    border-radius: 10px; 
+    padding:20px;
+    margin-bottom:20px;
+    transition : .3s;
+    border: solid  transparent;
+    box-sizing: border-box;
+  }
+  
+  .card:hover{
+    border-color: rgb(172, 63, 172);
+  }
+  
+  .custom-search {
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 30%; /* Adjust width as needed */
+    max-width: 500px; /* Max width to control the size */
+    height: 50px; /* Increase height to make it larger */
+    border-radius: 10px; /* Rounded border */
+    padding: 10px 20px; /* Padding for better appearance */
+    font-size: 16px; /* Increase font size */
+    border: 1px solid #ccc; /* Optional: custom border color */
+  }
+  
+  .custom-search:focus {
+    outline: none; /* Remove default outline */
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Optional: add shadow on focus */
+  }
+  
+  @media(max-width:969px){
+    section{
+      padding: 20px 0px;
+
+    }  .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        /* Provides spacing between cards */
+      }
+    
+      .card {
+        flex: 1 1 calc(100% - 40px);
+        /* Adjust the value to handle margin or padding */
+        max-width: calc(100% - 40px);
+        margin: 0 auto;
+        /* Centers the card if not full width */
+      }
+  }
+
+
+@media (max-width: 600px) {
+  section {
+    padding: 20px 0;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* Provides spacing between cards */
+  }
+
+  .card {
+    flex: 1 1 calc(100% - 40px);
+    /* Adjust the value to handle margin or padding */
+    max-width: calc(100% - 40px);
+    margin: 0 auto;
+    /* Centers the card if not full width */
+  }
+}
+
+  @media (max-width: 400px) {
+    .card {
+      width: calc(100% - 20px); /* Adjust width as needed */
+    }
+  }
