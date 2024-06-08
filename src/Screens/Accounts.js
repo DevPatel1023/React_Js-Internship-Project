@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import '../CSS/create.css';
+import '../CSS/account.css';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import UploadPhoto from '../Images/icons/uploadPhoto_icon.svg';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Box from '@mui/material/Box';
@@ -14,6 +13,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import Avatar1 from '../Images/avatars/avatar_1.jpg';
 
 const DemoPaper = styled(Paper)(({ theme }) => ({
     width: 400,
@@ -25,7 +25,17 @@ const DemoPaper = styled(Paper)(({ theme }) => ({
         width: 750,
     },
 }));
-
+const CustomTextField2 = styled(TextField)(({theme})=>({
+    '& .css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input':{
+        height: 'fit-content !important'
+    },
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'black !important',
+    },
+    '& .MuiFormLabel-root.Mui-focused': {
+        color: 'black !important',
+    },
+}))
 const CustomTextField = styled(TextField)(({ theme }) => ({
     '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
         borderColor: 'black !important',
@@ -119,19 +129,19 @@ const DemoPapers = styled(Paper)(({ theme }) => ({
 function CreateScreen() {
     const [countries, setCountries] = useState([]);
     const [formValues, setFormValues] = useState({
-        fullName: '',
-        email: '',
-        phoneNumber: '',
+        fullName: 'Vishrey Chotalia',
+        email: 'vishreychotalia@gmaiil.com',
+        phoneNumber: '123456789',
         country: '',
-        state: '',
-        city: '',
-        address: '',
-        zip: '',
-        company: '',
-        role: ''
+        state: 'Gujarat',
+        city: 'Nadiad',
+        address: '908 Jack Locks',
+        zip: '387370',
+        about: 'Praesent turpis. Phasellus viverra nulla ut metus varius laoreet. Phasellus tempus.'
     });
     const [errors, setErrors] = useState({});
-    const [isPhotoUploaded, setIsPhotoUploaded] = useState(false);
+    const [isPhotoUploaded, setIsPhotoUploaded] = useState(true);
+    const [avatarImage, setAvatarImage] = useState(Avatar1); // State to store the avatar image URL
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -170,7 +180,7 @@ function CreateScreen() {
             hasErrors = true;
         }
 
-        if (hasErrors) {
+        if (!hasErrors) {
             const imgbox = document.getElementById('imagebox-borderline');
             const imginner = document.getElementById('imagebox-inner');
             if (imgbox) {
@@ -181,9 +191,8 @@ function CreateScreen() {
         } else {
             const imgbox = document.getElementById('imagebox-borderline');
             if (imgbox) {
-                imgbox.style.border = 'none';
+                imgbox.style.border = '1px dotted rgb(146, 150, 154)';
             }
-            // Submit form
             console.log('Form Submitted', formValues);
         }
     };
@@ -192,14 +201,30 @@ function CreateScreen() {
         document.getElementById('upload-photo-input').click();
     };
 
+    const handlePhotoChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setAvatarImage(reader.result); // Set the newly uploaded image as the avatar
+            setIsPhotoUploaded(true);
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
     useEffect(() => {
         axios.get('https://restcountries.com/v2/all')
             .then(response => {
                 setCountries(response.data);
+                const india = response.data.find(country => country.name === 'India');
+                if (india) {
+                    setFormValues(prevValues => ({ ...prevValues, country: india.alpha2Code }));
+                }
             })
             .catch(error => {
                 console.error('Error fetching countries:', error);
-                console.error('Error response:', error.response); // Log the detailed error response
             });
     }, []);
 
@@ -212,7 +237,7 @@ function CreateScreen() {
                     <ul type='.'><li></li></ul>
                     <a className='navigation-links' href="">Blog</a>
                     <ul type='.'><li></li></ul>
-                    Create
+                    Account
                 </span>
             </div>
             <br /><br />
@@ -222,31 +247,41 @@ function CreateScreen() {
                     gap: '15px'
                 }}>
                     <Stack direction="row" spacing={2}>
-                        <DemoPaper className='demo-page-container' style={{ height: '450px' }}>
+                        <DemoPaper className='demo-page-container'>
                             <div className='upload-container' id='upload-container' onClick={handleUploadPhotoClick}>
                                 <div className="imagebox-borderline" id='imagebox-borderline'>
-                                    <div className="imagebox-inner" id='imagebox-inner'>
-                                        <img src={UploadPhoto} className='image-upload' alt="img" style={{ width: "35px", height: "35px" }} />
-                                        <span className='upload-img-text'>Upload photo</span>
-                                    </div>
+                                    <img src={avatarImage} alt="avatar" className="imagebox-inner" id='imagebox-inner' />
                                 </div>
                                 <br />
                                 <span className='upload-img-text'>Allowed *.jpeg, *.jpg, *.png, *.gif
                                     <br />max size of 3 Mb</span>
-                                {isPhotoUploaded || errors.photo ? <p className="avatar-required-text" style={{ color: 'red' }}>Avatar is required</p> : null}
-                                <input type="file" id="upload-photo-input" style={{ display: 'none' }} onChange={() => setIsPhotoUploaded(true)} />
+                                {isPhotoUploaded || errors.photo ? null : <p className="avatar-required-text" style={{ color: 'red' }}>Avatar is required</p>}
+                                <input type="file" id="upload-photo-input" style={{ display: 'none' }} onChange={handlePhotoChange} />
                             </div>
-                            <div className="email-verification">
-                                <p>Email Verified</p>
-                                <div className="verification-msg">
-                                    <span className='verification-email-msg'>
-                                        Disabling this will automatically send the user a verification email
-                                    </span>{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                            <div  style={{ display: 'flex', justifyContent: 'center' }}>
+                                <span>
+                                    <strong>
+                                    Public Profile
+                                    </strong>
+                                {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
                                     <FormControlLabel
                                         control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                                         color='rgb(0, 167, 111)'
                                     />
-                                </div>
+                                </span>
+                            </div>
+                            <br />
+                            <div className='button-container1'>
+                                <Stack direction="row" spacing={2}>
+                                    <Button
+                                        className='create-user-button1'
+                                        sx={{ textTransform: 'none', borderRadius: '10px' }}
+                                        onClick={handleSubmit}
+                                    ><strong>
+                                            Delete User
+                                        </strong>
+                                    </Button>
+                                </Stack>
                             </div>
                         </DemoPaper>
                     </Stack>
@@ -422,33 +457,16 @@ function CreateScreen() {
                                             mb: 1,
                                         }}
                                     />
-                                    <CustomTextField
-                                        className="user-details-field"
-                                        id="company"
-                                        label="Company"
+                                    <CustomTextField2
+                                        id="outlined-textarea"
+                                        label="About"
+                                        placeholder="About You"
+                                        multiline
                                         variant="outlined"
-                                        value={formValues.company}
-                                        onChange={handleChange}
-                                        error={errors.company}
-                                        helperText={errors.company ? 'Company Name is required' : ''}
-                                        InputProps={{
-                                            sx: {
-                                                borderRadius: '10px',
-                                            },
-                                        }}
-                                        sx={{
-                                            mb: 1,
-                                        }}
-                                    />
-                                    <CustomTextField
-                                        className="user-details-field"
-                                        id="role"
-                                        label="Role"
-                                        variant="outlined"
-                                        value={formValues.role}
+                                        value={formValues.about}
                                         onChange={handleChange}
                                         error={errors.role}
-                                        helperText={errors.role ? 'Role in the company is required' : ''}
+                                        helperText={errors.role ? 'About You is required' : ''}
                                         InputProps={{
                                             sx: {
                                                 borderRadius: '10px',
@@ -457,7 +475,9 @@ function CreateScreen() {
                                         sx={{
                                             mb: 1,
                                         }}
+                                        style={{ width: '92%' }} 
                                     />
+
                                     <br />
                                     <br />
                                     <div className='button-container'>
@@ -467,7 +487,7 @@ function CreateScreen() {
                                                 sx={{ textTransform: 'none', borderRadius: '10px' }}
                                                 onClick={handleSubmit}
                                             >
-                                                Create User
+                                                Save Changes
                                             </Button>
                                         </Stack>
                                     </div>
@@ -482,3 +502,5 @@ function CreateScreen() {
     );
 }
 export default CreateScreen;
+
+
