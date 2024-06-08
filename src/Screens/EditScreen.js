@@ -1,5 +1,5 @@
 import React from 'react';
-import '../CSS/edit.css';
+// import '../CSS/edit.css';
 import UploadPhoto from '../Images/icons/uploadPhoto_icon.svg';
 import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';

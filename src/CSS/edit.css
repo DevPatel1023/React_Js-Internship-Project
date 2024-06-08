@@ -1,0 +1,192 @@
+.create-container {
+    margin: 0;
+    padding: 0;
+    font-family: "Public Sans", sans-serif;
+    box-sizing: border-box;
+}
+
+.innner-container-handeler {
+    display: flex;
+    gap: 15px;
+    flex-grow: 50px;
+    justify-content: center;
+}
+
+.nav-link-container {
+    display: ruby;
+    padding-left: 15px;
+    line-height: 1.57143;
+    font-size: 0.875rem;
+    font-family: "Public Sans", sans-serif;
+    font-weight: 400;
+}
+
+.create-title-txt {
+    margin-bottom: 5px;
+}
+
+.navigation-links {
+    text-decoration: none;
+    color: rgb(33, 43, 54);
+}
+
+.navigation-links:hover {
+    text-decoration: underline 0.5px;
+}
+
+.current-location {
+    color: rgb(99, 115, 129);
+}
+
+
+.upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 280px;
+    flex-direction: column;
+}
+
+.imagebox-borderline {
+    border: 1px dotted rgb(146, 150, 154);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.badge-container{
+    display: flex;
+    justify-content: end;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.badge{
+    padding: 7px;
+    border-radius: 10px;
+    color: rgb(183, 110, 0);
+    background-color: rgba(255, 171, 0, 0.16);
+    font-size: 0.75rem;
+}
+.imagebox-inner {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(74, 81, 88, 0.08);
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+.imagebox-inner:hover{
+    opacity: 0.6;
+}
+.upload-img-text {
+    color: rgb(145, 158, 171);
+}
+
+
+.email-verification {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+
+.verification-email-msg {
+    color: rgb(145, 158, 171);
+    display: flex;
+}
+
+.verification-msg {
+    display: flex;
+}
+
+.form {
+    width: 350px;
+}
+
+.create-user-button {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(33, 43, 54) !important;
+}
+
+.button-container {
+    display: flex;
+    width: 98% !important;
+    justify-content: end;
+}
+.create-user-button1 {
+    color: rgb(183, 29, 24) !important;
+    background-color: rgba(255, 86, 48, 0.16) !important;
+}
+
+.button-container1 {
+    display: flex;
+    margin-top: 10px;
+    width: 98% !important;
+    justify-content: center;
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center !important;
+}
+
+.user-details-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: black in !important;
+}
+
+.user-details-field .MuiFormLabel-root.Mui-focused {
+    color: black !important;
+}
+
+.user-details-field .MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: black !important;
+}
+
+.user-details-field .MuiInputLabel-root.Mui-focused {
+    color: black !important;
+}
+
+@media (max-width: 1000px) {
+    .form-container {
+        flex-direction: column;
+    }
+
+    .user-details-field {
+        width: fit-content !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .form-container {
+        flex-direction: column;
+    }
+
+    .user-details-field {
+        width: fit-content !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .innner-container-handeler {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .email-verification {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        font-size: 22px;
+    }
+}

@@ -36,8 +36,7 @@ const Sidebar = () => {
       items: [
         { text: 'Profile', path: '/profile' },
         { text: 'Cards', path: '/cards' },
-        { text: 'List', path: '/list' },
-        { text: 'Create', path: '' },
+        { text: 'Create', path: '/create' },
         { text: 'Edit', path: '/edit' },
         { text: 'Account', path: '/account' },
       ],

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import  UserProfile  from './UserProfile';
 import DashboardImage from '../Images/authentication dash img/illustration_dashboard.png';
 import IconsJWT from '../Images/icons/ic_jwt.svg';
 import IconFirebase from '../Images/icons/ic_firebase.svg';
@@ -11,11 +13,17 @@ import eyeClose from '../Images/icons/close-eye.svg';
 import '../CSS/login.css';
 import Logo from '../Components/Logo';
 
+
 function LoginScreen() {
     const [showPassword, setShowPassword] = useState(false);
 
     const handlePasswordShow = () => {
         setShowPassword(!showPassword);
+    };
+    const navigate = useNavigate();
+
+    const onLoginBtn = () => {
+      navigate('/profile');
     };
 
     return (
@@ -97,7 +105,7 @@ function LoginScreen() {
                     <a href="#" className="forget-password">Forget Password?</a>
                     <br />
                     {/* login button */}
-                    <button type="button" className="login-button">Login</button>
+                    <button type="button" className="login-button" onClick={onLoginBtn}>Login</button>
                 </form>
             </main>
         </main>
