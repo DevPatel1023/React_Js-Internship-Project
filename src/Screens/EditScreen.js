@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React,{useState,useEffect} from 'react';
 import '../CSS/edit.css';
+import Stack from '@mui/material/Stack';
 import UploadPhoto from '../Images/icons/uploadPhoto_icon.svg';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
@@ -14,7 +15,6 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import Avatar1 from '../Images/avatars/avatar_2.jpg';
-import Stack from '@mui/material/Stack'; // Add this import
 
 const DemoPaper = styled(Paper)(({ theme }) => ({
     width: 400,
@@ -239,164 +239,290 @@ function CreateScreen() {
                     gap: '15px'
                 }}>
                     <Stack direction="row" spacing={2}>
-                        <DemoPaper className='demo-page'>
-                            <h3 className='profile-information-title'>
-                                Profile Information
-                            </h3>
-                            <br />
-                            <Box
-                                id='imagebox-borderline'
-                                sx={{
-                                    border: '1px dotted rgb(146, 150, 154)',
-                                    borderRadius: '10px',
-                                    padding: '1rem',
-                                    position: 'relative'
-                                }}
-                            >
-                                <div className="upload-image" onClick={handleUploadPhotoClick} style={{ cursor: 'pointer' }}>
-                                    <input
-                                        id="upload-photo-input"
-                                        type="file"
-                                        accept="image/*"
-                                        style={{ display: 'none' }}
-                                        onChange={handlePhotoChange}
-                                    />
-                                    <div id="imagebox-inner"
-                                        style={{
-                                            backgroundColor: isPhotoUploaded ? 'transparent' : 'rgba(255, 86, 48, 0.08)',
-                                            borderRadius: '10px',
-                                            textAlign: 'center',
-                                            position: 'relative'
-                                        }}
-                                    >
-                                        {isPhotoUploaded && avatarImage ? (
-                                            <img src={avatarImage} alt="Uploaded Avatar" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
-                                        ) : (
-                                            <>
-                                                <img src={UploadPhoto} alt="Upload" style={{ width: '150px', height: '150px' }} />
-                                                <p className="upload-photo">Upload photo</p>
-                                            </>
-                                        )}
-                                    </div>
+                        <DemoPaper className='demo-page-container'>
+                            <div className="badge-container">
+                                <span class="badge"><strong>Pending</strong></span>
+                            </div>
+                            <div className='upload-container' id='upload-container' onClick={handleUploadPhotoClick}>
+                                <div className="imagebox-borderline" id='imagebox-borderline'>
+                                    <img src={avatarImage} alt="avatar" className="imagebox-inner" id='imagebox-inner' />
                                 </div>
-                            </Box>
-                            <br /><br />
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& .MuiTextField-root': { marginBottom: 1, width: '100%' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-                                <CustomTextField
-                                    id="fullName"
-                                    label="Full Name"
-                                    variant="outlined"
-                                    value={formValues.fullName}
-                                    onChange={handleChange}
-                                    error={errors.fullName}
-                                    helperText={errors.fullName && 'This field is required'}
-                                />
-                                <CustomTextField
-                                    id="email"
-                                    label="Email"
-                                    variant="outlined"
-                                    value={formValues.email}
-                                    onChange={handleChange}
-                                    error={errors.email}
-                                    helperText={errors.email && 'This field is required'}
-                                />
-                                <CustomTextField
-                                    id="phoneNumber"
-                                    label="Phone Number"
-                                    variant="outlined"
-                                    value={formValues.phoneNumber}
-                                    onChange={handleChange}
-                                    error={errors.phoneNumber}
-                                    helperText={errors.phoneNumber && 'This field is required'}
-                                />
-                                <CustomFormControl>
-                                    <InputLabel id="country-label">Country</InputLabel>
-                                    <CustomSelect
-                                        labelId="country-label"
-                                        id="country"
-                                        value={formValues.country}
-                                        onChange={handleCountryChange}
-                                        error={errors.country}
-                                    >
-                                        {countries.map((country) => (
-                                            <MenuItem key={country.alpha2Code} value={country.alpha2Code}>
-                                                {country.name}
-                                            </MenuItem>
-                                        ))}
-                                    </CustomSelect>
-                                </CustomFormControl>
-                                <CustomTextField
-                                    id="state"
-                                    label="State"
-                                    variant="outlined"
-                                    value={formValues.state}
-                                    onChange={handleChange}
-                                    error={errors.state}
-                                    helperText={errors.state && 'This field is required'}
-                                />
-                                <CustomTextField
-                                    id="city"
-                                    label="City"
-                                    variant="outlined"
-                                    value={formValues.city}
-                                    onChange={handleChange}
-                                    error={errors.city}
-                                    helperText={errors.city && 'This field is required'}
-                                />
-                                <CustomTextField
-                                    id="address"
-                                    label="Address"
-                                    variant="outlined"
-                                    value={formValues.address}
-                                    onChange={handleChange}
-                                    error={errors.address}
-                                    helperText={errors.address && 'This field is required'}
-                                />
-                                <CustomTextField
-                                    id="zip"
-                                    label="ZIP Code"
-                                    variant="outlined"
-                                    value={formValues.zip}
-                                    onChange={handleChange}
-                                    error={errors.zip}
-                                    helperText={errors.zip && 'This field is required'}
-                                />
-                                <CustomTextField
-                                    id="company"
-                                    label="Company"
-                                    variant="outlined"
-                                    value={formValues.company}
-                                    onChange={handleChange}
-                                    error={errors.company}
-                                    helperText={errors.company && 'This field is required'}
-                                />
-                                <CustomTextField
-                                    id="role"
-                                    label="Role"
-                                    variant="outlined"
-                                    value={formValues.role}
-                                    onChange={handleChange}
-                                    error={errors.role}
-                                    helperText={errors.role && 'This field is required'}
-                                />
-                                <FormControlLabel
-                                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                                    label="Assign Role"
-                                />
-                            </Box>
+                                <br />
+                                <span className='upload-img-text'>Allowed *.jpeg, *.jpg, *.png, *.gif
+                                    <br />max size of 3 Mb</span>
+                                {isPhotoUploaded || errors.photo ? null : <p className="avatar-required-text" style={{ color: 'red' }}>Avatar is required</p>}
+                                <input type="file" id="upload-photo-input" style={{ display: 'none' }} onChange={handlePhotoChange} />
+                            </div>
+                            <div className="email-verification">
+                                <p>
+                                    Banned</p>
+                                <div className="verification-msg">
+                                    <span className='verification-email-msg'>
+                                        Disabling this will automatically send the user a verification email
+                                    </span>{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                                    <FormControlLabel
+                                        control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                                        color='rgb(0, 167, 111)'
+                                    />
+                                </div>
+                            </div>
+                            <div className="email-verification">
+                                <p>Email Verified</p>
+                                <div className="verification-msg">
+                                    <span className='verification-email-msg'>
+                                        Disabling this will automatically send the user a verification email
+                                    </span>{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                                    <FormControlLabel
+                                        control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                                        color='rgb(0, 167, 111)'
+                                    />
+                                </div>
+                            </div>
+                            <div className='button-container1'>
+                                <Stack direction="row" spacing={2}>
+                                    <Button
+                                        className='create-user-button1'
+                                        sx={{ textTransform: 'none', borderRadius: '10px' }}
+                                        onClick={handleSubmit}
+                                    ><strong>
+                                            Delete User
+                                        </strong>
+                                    </Button>
+                                </Stack>
+                            </div>
                         </DemoPaper>
+                    </Stack>
+                </div>
+                <div className="container-handle-2">
+                    <Stack direction="row" spacing={2}>
+                        <DemoPapers className="demo-pages-2" square={false}>
+                            <div>
+                                <Box
+                                    component="form"
+                                    sx={{
+                                        '& > :not(style)': { m: 1, width: '350px' },
+                                    }}
+                                    noValidate
+                                    autoComplete="off"
+                                >
+                                    <CustomTextField
+                                        className="user-details-field"
+                                        id="fullName"
+                                        label="Full Name"
+                                        variant="outlined"
+                                        value={formValues.fullName}
+                                        onChange={handleChange}
+                                        error={errors.fullName}
+                                        helperText={errors.fullName ? 'Full Name Required' : ''}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '10px',
+                                            },
+                                        }}
+                                    />
+                                    <CustomTextField
+                                        className="user-details-field"
+                                        id="email"
+                                        label="Email Address"
+                                        variant="outlined"
+                                        value={formValues.email}
+                                        onChange={handleChange}
+                                        error={errors.email}
+                                        helperText={errors.email ? 'Email Address Required' : ''}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '10px',
+                                            },
+                                        }}
+                                        sx={{
+                                            mb: 1,
+                                        }}
+                                    />
+                                    <CustomTextField
+                                        className="user-details-field"
+                                        id="state"
+                                        label="State/Region"
+                                        variant="outlined"
+                                        value={formValues.state}
+                                        onChange={handleChange}
+                                        error={errors.state}
+                                        helperText={errors.state ? 'State/Region is required' : ''}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '10px',
+                                            },
+                                        }}
+                                        sx={{
+                                            mb: 1,
+                                        }}
+                                    />
+                                    <Box sx={{ minWidth: 400, display: 'inline' }}>
+                                        <CustomFormControl variant="outlined" style={{ marginTop: '9px' }} error={errors.country}>
+                                            <InputLabel id="demo-simple-select-label">Enter the Country</InputLabel>
+                                            <CustomSelect
+                                                labelId="demo-simple-select-label"
+                                                id="country"
+                                                value={formValues.country}
+                                                onChange={handleCountryChange}
+                                                label="Enter the Country"
+                                                style={{ width: '350px', borderRadius: '10px' }}
+                                                MenuProps={{
+                                                    PaperProps: {
+                                                        sx: {
+                                                            maxHeight: 200,
+                                                            overflow: 'auto',
+                                                            zIndex: 1302,
+                                                        },
+                                                    },
+                                                }}
+                                            >
+                                                {countries.length > 0 ? (
+                                                    countries.map((country, index) => (
+                                                        <MenuItem key={index} value={country.alpha2Code}>
+                                                            <img src={country.flags.svg} alt={country.name} style={{ width: '20px', height: '20px', marginRight: '10px', borderRadius: '50%' }} />
+                                                            {country.name}
+                                                        </MenuItem>
+                                                    ))
+                                                ) : (
+                                                    <MenuItem value="" disabled>
+                                                        Loading...
+                                                    </MenuItem>
+                                                )}
+                                            </CustomSelect>
+                                            {errors.country && <p style={{ color: '#d32f2f', fontSize: '12px', marginTop: '5px', marginLeft: '10px' }}>Country is Required</p>}
+                                        </CustomFormControl>
+                                    </Box>
+                                    <CustomTextField
+                                        className="user-details-field"
+                                        id="phoneNumber"
+                                        label="Phone Number"
+                                        variant="outlined"
+                                        value={formValues.phoneNumber}
+                                        onChange={handleChange}
+                                        error={errors.phoneNumber}
+                                        helperText={errors.phoneNumber ? 'Phone Number Required' : ''}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '10px',
+                                            },
+                                        }}
+                                        sx={{
+                                            mb: 1,
+                                        }}
+                                    />
+                                    <CustomTextField
+                                        className="user-details-field"
+                                        id="city"
+                                        label="City"
+                                        variant="outlined"
+                                        value={formValues.city}
+                                        onChange={handleChange}
+                                        error={errors.city}
+                                        helperText={errors.city ? 'City is required' : ''}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '10px',
+                                            },
+                                        }}
+                                        sx={{
+                                            mb: 1,
+                                        }}
+                                    />
+                                    <CustomTextField
+                                        className="user-details-field"
+                                        id="address"
+                                        label="Address"
+                                        variant="outlined"
+                                        value={formValues.address}
+                                        onChange={handleChange}
+                                        error={errors.address}
+                                        helperText={errors.address ? 'Address is required' : ''}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '10px',
+                                            },
+                                        }}
+                                        sx={{
+                                            mb: 1,
+                                        }}
+                                    />
+                                    <CustomTextField
+                                        className="user-details-field"
+                                        id="zip"
+                                        label="Zip/Code"
+                                        variant="outlined"
+                                        value={formValues.zip}
+                                        onChange={handleChange}
+                                        error={errors.zip}
+                                        helperText={errors.zip ? 'Zip Code is required' : ''}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '10px',
+                                            },
+                                        }}
+                                        sx={{
+                                            mb: 1,
+                                        }}
+                                    />
+                                    <CustomTextField
+                                        className="user-details-field"
+                                        id="company"
+                                        label="Company"
+                                        variant="outlined"
+                                        value={formValues.company}
+                                        onChange={handleChange}
+                                        error={errors.company}
+                                        helperText={errors.company ? 'Company Name is required' : ''}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '10px',
+                                            },
+                                        }}
+                                        sx={{
+                                            mb: 1,
+                                        }}
+                                    />
+                                    <CustomTextField
+                                        className="user-details-field"
+                                        id="role"
+                                        label="Role"
+                                        variant="outlined"
+                                        value={formValues.role}
+                                        onChange={handleChange}
+                                        error={errors.role}
+                                        helperText={errors.role ? 'Role in the company is required' : ''}
+                                        InputProps={{
+                                            sx: {
+                                                borderRadius: '10px',
+                                            },
+                                        }}
+                                        sx={{
+                                            mb: 1,
+                                        }}
+                                    />
+                                    <br />
+                                    <br />
+                                    <div className='button-container'>
+                                        <Stack direction="row" spacing={2}>
+                                            <Button
+                                                className='create-user-button'
+                                                sx={{ textTransform: 'none', borderRadius: '10px' }}
+                                                onClick={handleSubmit}
+                                            >
+                                                Save Changes
+                                            </Button>
+                                        </Stack>
+                                    </div>
+                                    <br />
+                                </Box>
+                            </div>
+                        </DemoPapers>
                     </Stack>
                 </div>
             </div>
         </div>
     );
 }
-
 export default CreateScreen;
+
+
