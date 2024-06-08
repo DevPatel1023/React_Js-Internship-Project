@@ -222,7 +222,7 @@ function CreateScreen() {
 
     return (
         <div className='create-container'>
-            <h2 className='create-title-txt'>Create a new user</h2>
+            <h2 className='create-title-txt'>Edit user</h2>
             <div className='nav-link-container'>
                 <span className='current-location'>
                     <a className='navigation-links' href="#">Dashboard</a>
