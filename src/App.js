@@ -14,6 +14,10 @@ import Account from './Screens/Account';
 import BlogList from './Screens/BlogList';
 import Card from './Screens/Card';
 import BlogDescription from './Screens/BlogDescription';
+import Feed from './Screens/Feed';  // Adjust the path if necessary
+import ActivityFeed from './Screens/userActivity';
+import StoryHighlights from './Screens/storyhighlight';
+
 
 const theme = createTheme({
   palette: {
@@ -40,6 +44,7 @@ const App = () => {
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             <Router>
               <Routes>
+              <Route path="/" element={<Feed />} />
                 <Route path="/profile" element={<UserProfile />} />
                 <Route path="/edit" element={<EditScreen />} />
                 <Route path="/create" element={<CreateScreen />} />
@@ -50,6 +55,8 @@ const App = () => {
                 <Route path="blog/detail" element={<BlogDescription />} />
                 <Route path="/blog/edit" element={<EditBlog />} />
                 <Route path="/login" element={<LoginScreen />} />
+                <Route path="/activity" element={<ActivityFeed />} />
+                <Route path="/story" element={<StoryHighlights />} />
               </Routes>
             </Router>
           </Box>

@@ -111,8 +111,7 @@ function UserProfile() {
                 <CardMedia
                   component="img"
                   height="200"
-                  image="https://api-prod-minimal-v510.vercel.app/assets/images/cover/cover_4.jpg"
-                  alt="green iguana"
+                  image="https://images.freecreatives.com/wp-content/uploads/2016/04/Website-Backgrounds-For-Desktop.jpg" alt="green iguana"
                 />
                 <CardContent>
                   <div class="MuiAvatar-root MuiAvatar-circular css-btmpc1" display="inline-block">
